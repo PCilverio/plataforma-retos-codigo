@@ -50,91 +50,115 @@ export default function ChallengesList() {
       });
   };
 
-  if (loading) return <div style={{ padding: '20px', color: '#0056b3', fontWeight: 'bold' }}>⏳ Cargando retos desde el servidor...</div>;
-  if (error && challenges.length === 0) return <div style={{ padding: '20px', backgroundColor: '#ffebee', color: '#c62828', borderRadius: '6px', border: '1px solid #ef9a9a', fontWeight: 'bold' }}>⚠️ {error}</div>;
+  if (loading) return <div style={{ padding: '40px', textAlign: 'center', color: '#4f46e5', fontWeight: '600', fontFamily: 'system-ui' }}>⏳ Cargando retos desde el servidor...</div>;
+  if (error && challenges.length === 0) return <div style={{ padding: '20px', maxWidth: '600px', margin: '30px auto', backgroundColor: '#fef2f2', color: '#991b1b', borderRadius: '12px', border: '1px solid #fca5a5', fontWeight: 'bold', fontFamily: 'system-ui', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>⚠️ {error}</div>;
 
   return (
-    <div style={{ display: 'flex', gap: '25px', marginTop: '20px', fontFamily: 'sans-serif' }}>
+    <div style={{ display: 'flex', gap: '30px', marginTop: '30px', fontFamily: 'system-ui, sans-serif', maxWidth: '1100px', margin: '20px auto', padding: '0 20px' }}>
       
-      <div style={{ width: '35%', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        <h3 style={{ color: '#0056b3', margin: '0 0 5px 0' }}>Retos</h3>
-        {challenges.map((challenge) => (
-          <div 
-            key={challenge.id} 
-            onClick={() => { setSelectedChallenge(challenge); setSubmissionResult(null); }}
-            style={{
-              padding: '15px',
-              borderRadius: '8px',
-              border: '1px solid #e0e0e0',
-              cursor: 'pointer',
-              backgroundColor: selectedChallenge?.id === challenge.id ? '#e3f2fd' : '#fff',
-              borderLeft: selectedChallenge?.id === challenge.id ? '5px solid #0056b3' : '1px solid #e0e0e0',
-              transition: 'all 0.2s ease'
-            }}
-          >
-            <h4 style={{ margin: '0 0 5px 0', color: '#333' }}>{challenge.title}</h4>
-            <span style={{ 
-              fontSize: '11px', 
-              padding: '2px 6px', 
-              borderRadius: '8px', 
-              backgroundColor: challenge.difficulty === 'Fácil' ? '#e8f5e9' : '#fff3e0', 
-              color: challenge.difficulty === 'Fácil' ? '#2e7d32' : '#ef6c00',
-              fontWeight: 'bold'
-            }}>
-              {challenge.difficulty}
-            </span>
-          </div>
-        ))}
+      {/* SECCIÓN IZQUIERDA: LISTA */}
+      <div style={{ width: '35%', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <h3 style={{ color: '#1e293b', margin: '0 0 4px 0', fontSize: '18px', fontWeight: '700', letterSpacing: '-0.5px' }}>Desafíos Disponibles</h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          {challenges.map((challenge) => {
+            const isSelected = selectedChallenge?.id === challenge.id;
+            return (
+              <div 
+                key={challenge.id} 
+                onClick={() => { setSelectedChallenge(challenge); setSubmissionResult(null); }}
+                style={{
+                  padding: '18px',
+                  borderRadius: '14px',
+                  cursor: 'pointer',
+                  backgroundColor: isSelected ? '#eef2ff' : '#ffffff',
+                  border: isSelected ? '2px solid #4f46e5' : '2px solid #f1f5f9',
+                  boxShadow: isSelected ? '0 10px 15px -3px rgba(79, 70, 229, 0.1)' : '0 4px 6px -1px rgba(0, 0, 0, 0.02)',
+                  transform: isSelected ? 'translateY(-2px)' : 'none',
+                  transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)'
+                }}
+              >
+                <h4 style={{ margin: '0 0 8px 0', color: isSelected ? '#4f46e5' : '#334155', fontWeight: '600', fontSize: '15px' }}>{challenge.title}</h4>
+                <span style={{ 
+                  fontSize: '11px', 
+                  padding: '4px 10px', 
+                  borderRadius: '20px', 
+                  backgroundColor: challenge.difficulty === 'Fácil' ? '#dcfce7' : '#ffedd5', 
+                  color: challenge.difficulty === 'Fácil' ? '#15803d' : '#b45309',
+                  fontWeight: '700'
+                }}>
+                  {challenge.difficulty}
+                </span>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
-      <div style={{ width: '65%', backgroundColor: '#fff', padding: '20px', borderRadius: '8px', border: '1px solid #e0e0e0' }}>
+      {/* SECCIÓN DERECHA: DETALLE Y EDITOR */}
+      <div style={{ width: '65%', backgroundColor: '#ffffff', padding: '30px', borderRadius: '20px', border: '1px solid #e2e8f0', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02)' }}>
         {selectedChallenge ? (
           <div>
-            <span style={{ fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase', color: selectedChallenge.difficulty === 'Fácil' ? '#2e7d32' : '#ef6c00' }}>
+            <span style={{ fontSize: '11px', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.5px', color: selectedChallenge.difficulty === 'Fácil' ? '#16a34a' : '#ca8a04' }}>
               {selectedChallenge.difficulty}
             </span>
-            <h2 style={{ margin: '5px 0 10px 0', color: '#212529' }}>{selectedChallenge.title}</h2>
-            <p style={{ color: '#555', lineHeight: '1.6', marginBottom: '20px' }}>{selectedChallenge.description}</p>
+            <h2 style={{ margin: '6px 0 12px 0', color: '#0f172a', fontSize: '26px', fontWeight: '800', letterSpacing: '-0.5px' }}>{selectedChallenge.title}</h2>
+            <p style={{ color: '#475569', lineHeight: '1.7', marginBottom: '24px', fontSize: '15px' }}>{selectedChallenge.description}</p>
             
-            <div style={{ background: '#1e1e1e', color: '#d4d4d4', padding: '12px', borderRadius: '6px', fontFamily: 'monospace', fontSize: '13px', marginBottom: '20px' }}>
-              // {selectedChallenge.title}
+            {/* Cabecera simulada de editor de código */}
+            <div style={{ backgroundColor: '#1e293b', borderTopLeftRadius: '12px', borderTopRightRadius: '12px', padding: '10px 16px', display: 'flex', gap: '6px', alignItems: 'center', borderBottom: '1px solid #334155' }}>
+              <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#ef4444' }}></div>
+              <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#eab308' }}></div>
+              <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#22c55e' }}></div>
+              <span style={{ color: '#94a3b8', fontSize: '11px', fontFamily: 'monospace', marginLeft: '10px' }}>solucion.js</span>
+            </div>
+            <div style={{ background: '#0f172a', color: '#38bdf8', padding: '16px', borderBottomLeftRadius: '12px', borderBottomRightRadius: '12px', fontFamily: 'JetBrains Mono, Fira Code, monospace', fontSize: '13px', marginBottom: '26px', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.2)' }}>
+              <span style={{ color: '#64748b' }}>// Función para resolver:</span> {selectedChallenge.title.toLowerCase().replace(/ /g, '_')}()
             </div>
 
             {submissionResult && (
               <div style={{ 
-                padding: '12px', 
-                borderRadius: '6px', 
-                marginBottom: '15px', 
-                fontWeight: 'bold',
-                backgroundColor: submissionResult.status === 'Aceptado' ? '#e8f5e9' : '#ffebee', 
-                color: submissionResult.status === 'Aceptado' ? '#2e7d32' : '#c62828',
-                border: `1px solid ${submissionResult.status === 'Aceptado' ? '#a5d6a7' : '#ef9a9a'}`
+                padding: '16px', 
+                borderRadius: '12px', 
+                marginBottom: '20px', 
+                fontWeight: '600',
+                fontSize: '14px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px',
+                backgroundColor: submissionResult.status === 'Aceptado' ? '#f0fdf4' : '#fef2f2', 
+                color: submissionResult.status === 'Aceptado' ? '#166534' : '#991b1b',
+                border: `1px solid ${submissionResult.status === 'Aceptado' ? '#bbf7d0' : '#fca5a5'}`,
+                boxShadow: '0 4px 6px -1px rgba(0,0,0,0.02)'
               }}>
-                {submissionResult.status === 'Aceptado' ? '✅ ¡Respuesta Aceptada!' : '❌ Respuesta Incorrecta (Falta la palabra return)'}
-                <span style={{ display: 'block', fontSize: '11px', fontWeight: 'normal', marginTop: '4px', color: '#666' }}>ID Envío: {submissionResult.id}</span>
+                <span>{submissionResult.status === 'Aceptado' ? '✅ ¡Prueba superada con éxito!' : '❌ Error de compilación (Falta usar "return")'}</span>
+                <span style={{ fontSize: '11px', fontWeight: '400', color: '#64748b' }}>ID de transación: {submissionResult.id}</span>
               </div>
             )}
 
             <form onSubmit={handleSubmit}>
-              <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '8px', color: '#333' }}>Tu respuesta</label>
+              <label style={{ display: 'block', fontWeight: '600', marginBottom: '10px', color: '#334155', fontSize: '14px' }}>Escribe tu propuesta de código:</label>
               <textarea 
-                rows="4"
+                rows="5"
                 value={codeAnswer}
                 onChange={(e) => setCodeAnswer(e.target.value)}
-                placeholder="Escribe tu código o salida esperada aquí..."
+                placeholder="function solucion() {&#10;  return ...&#10;}"
                 required
-                style={{ width: '100%', padding: '12px', borderRadius: '6px', border: '1px solid #ccc', fontFamily: 'monospace', fontSize: '13px', boxSizing: 'border-box', marginBottom: '15px', resize: 'vertical' }}
+                style={{ width: '100%', padding: '16px', borderRadius: '12px', border: '2px solid #e2e8f0', fontFamily: 'monospace', fontSize: '13px', boxSizing: 'border-box', marginBottom: '20px', resize: 'vertical', outline: 'none', transition: 'border-color 0.2s', backgroundColor: '#f8fafc' }}
+                onFocus={(e) => e.target.style.borderColor = '#4f46e5'}
+                onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
               />
               <button 
                 type="submit" 
-                style={{ width: '100%', padding: '12px', background: '#0056b3', color: '#fff', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', fontSize: '14px' }}
+                style={{ width: '100%', padding: '14px', background: '#4f46e5', color: '#fff', border: 'none', borderRadius: '12px', fontWeight: '600', cursor: 'pointer', fontSize: '15px', boxShadow: '0 4px 12px rgba(79, 70, 229, 0.25)', transition: 'all 0.2s' }}
+                onMouseOver={(e) => e.target.style.background = '#4338ca'}
+                onMouseOut={(e) => e.target.style.background = '#4f46e5'}
               >
-                Enviar respuesta
+                Enviar Solución Temeraria
               </button>
             </form>
           </div>
         ) : (
-          <p style={{ color: '#777' }}>Selecciona un reto de la lista para comenzar.</p>
+          <p style={{ color: '#64748b', textAlign: 'center', padding: '40px 0' }}>Selecciona un desafío del panel izquierdo.</p>
         )}
       </div>
 
