@@ -77,8 +77,8 @@ export default function ChallengesList() {
               fontSize: '11px', 
               padding: '2px 6px', 
               borderRadius: '8px', 
-              backgroundColor: challenge.difficulty === 'Easy' ? '#e8f5e9' : '#fff3e0', 
-              color: challenge.difficulty === 'Easy' ? '#2e7d32' : '#ef6c00',
+              backgroundColor: challenge.difficulty === 'Fácil' ? '#e8f5e9' : '#fff3e0', 
+              color: challenge.difficulty === 'Fácil' ? '#2e7d32' : '#ef6c00',
               fontWeight: 'bold'
             }}>
               {challenge.difficulty}
@@ -90,7 +90,7 @@ export default function ChallengesList() {
       <div style={{ width: '65%', backgroundColor: '#fff', padding: '20px', borderRadius: '8px', border: '1px solid #e0e0e0' }}>
         {selectedChallenge ? (
           <div>
-            <span style={{ fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase', color: selectedChallenge.difficulty === 'Easy' ? '#2e7d32' : '#ef6c00' }}>
+            <span style={{ fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase', color: selectedChallenge.difficulty === 'Fácil' ? '#2e7d32' : '#ef6c00' }}>
               {selectedChallenge.difficulty}
             </span>
             <h2 style={{ margin: '5px 0 10px 0', color: '#212529' }}>{selectedChallenge.title}</h2>
@@ -106,11 +106,11 @@ export default function ChallengesList() {
                 borderRadius: '6px', 
                 marginBottom: '15px', 
                 fontWeight: 'bold',
-                backgroundColor: submissionResult.status === 'Accepted' ? '#e8f5e9' : '#ffebee', 
-                color: submissionResult.status === 'Accepted' ? '#2e7d32' : '#c62828',
-                border: `1px solid ${submissionResult.status === 'Accepted' ? '#a5d6a7' : '#ef9a9a'}`
+                backgroundColor: submissionResult.status === 'Aceptado' ? '#e8f5e9' : '#ffebee', 
+                color: submissionResult.status === 'Aceptado' ? '#2e7d32' : '#c62828',
+                border: `1px solid ${submissionResult.status === 'Aceptado' ? '#a5d6a7' : '#ef9a9a'}`
               }}>
-                {submissionResult.status === 'Accepted' ? '✅ ¡Respuesta Aceptada!' : '❌ Respuesta Incorrecta (Falta la palabra return)'}
+                {submissionResult.status === 'Aceptado' ? '✅ ¡Respuesta Aceptada!' : '❌ Respuesta Incorrecta (Falta la palabra return)'}
                 <span style={{ display: 'block', fontSize: '11px', fontWeight: 'normal', marginTop: '4px', color: '#666' }}>ID Envío: {submissionResult.id}</span>
               </div>
             )}

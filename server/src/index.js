@@ -11,8 +11,8 @@ app.use(cors({
 app.use(express.json());
 
 const mockChallenges = [
-  { id: "1", title: "Reverse a String", description: "Escribe una función que invierta una cadena de texto.", difficulty: "Easy" },
-  { id: "2", title: "Two Sum", description: "Dado un array de enteros, devuelve los índices de los dos números que sumen el objetivo.", difficulty: "Medium" }
+  { id: "1", title: "Invertir una Cadena", description: "Escribe una función que invierta una cadena de texto.", difficulty: "Fácil" },
+  { id: "2", title: "Suma de Dos Números", description: "Dado un array de enteros, devuelve los índices de los dos números que sumen el objetivo.", difficulty: "Medio" }
 ];
 
 const mockSubmissions = [];
@@ -37,7 +37,7 @@ app.post('/api/submissions', (req, res) => {
       id: Math.random().toString(36).substring(2, 9),
       challengeId,
       code,
-      status: code.includes("return") ? "Accepted" : "Wrong Answer",
+      status: code.includes("return") ? "Aceptado" : "Respuesta Incorrecta",
       createdAt: new Date()
     };
 
