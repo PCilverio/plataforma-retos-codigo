@@ -4,14 +4,12 @@ import cors from 'cors';
 const app = express();
 const PORT = 3000;
 
-// 🔒 REQUERIMIENTO: Configuración de CORS para permitir al cliente Astro (Puerto 4321)
 app.use(cors({
   origin: 'http://localhost:4321'
 }));
 
 app.use(express.json());
 
-// Datos estáticos temporales para simular la base de datos
 const mockChallenges = [
   { id: "1", title: "Reverse a String", description: "Escribe una función que invierta una cadena de texto.", difficulty: "Easy" },
   { id: "2", title: "Two Sum", description: "Dado un array de enteros, devuelve los índices de los dos números que sumen el objetivo.", difficulty: "Medium" }
@@ -19,7 +17,6 @@ const mockChallenges = [
 
 const mockSubmissions = [];
 
-// 📋 ENDPOINT 1: GET /api/challenges
 app.get('/api/challenges', (req, res) => {
   try {
     res.json(mockChallenges);
@@ -52,5 +49,5 @@ app.post('/api/submissions', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(` API del Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`API del Servidor corriendo en http://localhost:${PORT}`);
 });
